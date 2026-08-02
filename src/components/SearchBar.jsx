@@ -1,76 +1,89 @@
-import { FiMapPin, FiCalendar, FiUsers, FiSearch } from "react-icons/fi";
+import { FaCalendarAlt, FaSearch, FaUserFriends } from "react-icons/fa";
+import { MdLocationOn } from "react-icons/md";
+import { motion } from "framer-motion";
 
-const SearchBar = () => {
+export default function SearchBar() {
   return (
-    <div className="w-full max-w-6xl mx-auto bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-3">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-        {/* Location */}
-        <div className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 transition">
-          <FiMapPin className="text-2xl text-indigo-600" />
-          <div className="flex flex-col w-full">
-            <span className="text-xs font-semibold text-gray-500">
-              Location
-            </span>
-            <input
-              type="text"
-              placeholder="Where are you going?"
-              className="outline-none bg-transparent text-gray-800 placeholder-gray-400"
-            />
-          </div>
-        </div>
+    <motion.div
+      initial={{ y: 80, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="relative z-30 -mt-20 px-5"
+    >
+      <div className="mx-auto max-w-7xl rounded-3xl bg-white/90 backdrop-blur-xl shadow-2xl border border-white/30 p-6">
+        <div className="grid gap-6 lg:grid-cols-5">
+          {/* Destination */}
 
-        {/* Check In */}
-        <div className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 transition">
-          <FiCalendar className="text-2xl text-indigo-600" />
-          <div className="flex flex-col w-full">
-            <span className="text-xs font-semibold text-gray-500">
-              Check In
-            </span>
-            <input
-              type="date"
-              className="outline-none bg-transparent text-gray-800"
-            />
-          </div>
-        </div>
+          <div className="flex items-center gap-4 rounded-2xl bg-gray-50 p-4">
+            <MdLocationOn className="text-3xl text-yellow-600" />
 
-        {/* Check Out */}
-        <div className="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 transition">
-          <FiCalendar className="text-2xl text-indigo-600" />
-          <div className="flex flex-col w-full">
-            <span className="text-xs font-semibold text-gray-500">
-              Check Out
-            </span>
-            <input
-              type="date"
-              className="outline-none bg-transparent text-gray-800"
-            />
-          </div>
-        </div>
+            <div>
+              <p className="text-sm text-gray-500">Destination</p>
 
-        {/* Guests */}
-        <div className="flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-gray-100 transition">
-          <div className="flex items-center gap-3 w-full">
-            <FiUsers className="text-2xl text-indigo-600" />
-            <div className="flex flex-col w-full">
-              <span className="text-xs font-semibold text-gray-500">
-                Guests
-              </span>
               <input
-                type="number"
-                min="1"
-                placeholder="2 Guests"
-                className="outline-none bg-transparent text-gray-800"
+                type="text"
+                placeholder="Where to?"
+                className="mt-1 w-full bg-transparent font-semibold outline-none"
               />
             </div>
           </div>
 
-          <button className="ml-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-purple-600 hover:to-indigo-600 text-white p-4 rounded-2xl transition duration-300 shadow-lg hover:scale-105">
-            <FiSearch size={22} />
+          {/* Check In */}
+
+          <div className="flex items-center gap-4 rounded-2xl bg-gray-50 p-4">
+            <FaCalendarAlt className="text-2xl text-yellow-600" />
+
+            <div>
+              <p className="text-sm text-gray-500">Check In</p>
+
+              <input
+                type="date"
+                className="mt-1 bg-transparent font-semibold outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Check Out */}
+
+          <div className="flex items-center gap-4 rounded-2xl bg-gray-50 p-4">
+            <FaCalendarAlt className="text-2xl text-yellow-600" />
+
+            <div>
+              <p className="text-sm text-gray-500">Check Out</p>
+
+              <input
+                type="date"
+                className="mt-1 bg-transparent font-semibold outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Guests */}
+
+          <div className="flex items-center gap-4 rounded-2xl bg-gray-50 p-4">
+            <FaUserFriends className="text-2xl text-yellow-600" />
+
+            <div>
+              <p className="text-sm text-gray-500">Guests</p>
+
+              <select className="mt-1 bg-transparent font-semibold outline-none">
+                <option>1 Guest</option>
+                <option>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4 Guests</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Button */}
+
+          <button className="flex items-center justify-center gap-3 rounded-2xl bg-yellow-600 text-white font-semibold transition duration-300 hover:scale-105 hover:bg-yellow-700">
+            <FaSearch />
+            Search Hotels
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
-};
-
-export default SearchBar;
+}

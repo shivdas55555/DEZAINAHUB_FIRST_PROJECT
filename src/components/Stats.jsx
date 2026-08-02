@@ -1,61 +1,78 @@
-import { FiGlobe, FiHome, FiUsers, FiAward } from "react-icons/fi";
+import { motion } from "framer-motion";
+import { FaHotel, FaUsers, FaGlobeAsia, FaAward } from "react-icons/fa";
 
 const stats = [
   {
-    id: 1,
-    icon: <FiGlobe />,
-    number: "150+",
-    title: "Countries",
-    description: "Explore destinations worldwide",
+    icon: <FaHotel />,
+    number: "500+",
+    title: "Luxury Hotels",
   },
   {
-    id: 2,
-    icon: <FiHome />,
-    number: "50K+",
-    title: "Hotels",
-    description: "Luxury stays available",
+    icon: <FaUsers />,
+    number: "25K+",
+    title: "Happy Guests",
   },
   {
-    id: 3,
-    icon: <FiUsers />,
-    number: "2M+",
-    title: "Happy Travelers",
-    description: "Guests served globally",
+    icon: <FaGlobeAsia />,
+    number: "120+",
+    title: "Destinations",
   },
   {
-    id: 4,
-    icon: <FiAward />,
+    icon: <FaAward />,
     number: "15+",
-    title: "Awards",
-    description: "Recognized for excellence",
+    title: "Awards Won",
   },
 ];
 
-const Stats = () => {
+export default function Stats() {
   return (
-    <section className="py-20 bg-gradient-to-r from-indigo-600 to-purple-600">
+    <section className="py-28 bg-[#f8f6f2]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <div key={stat.id} className="text-center text-white group">
-              {/* Icon */}
-              <div className="mx-auto w-16 h-16 flex items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl mb-5 group-hover:scale-110 transition duration-300">
-                {stat.icon}
+        <div className="text-center mb-16">
+          <p className="uppercase tracking-[5px] text-yellow-600 font-semibold">
+            Why Choose Us
+          </p>
+
+          <h2 className="text-5xl font-bold mt-4 text-gray-900">
+            Trusted Around The World
+          </h2>
+
+          <p className="mt-5 max-w-2xl mx-auto text-gray-500">
+            We provide exceptional hospitality experiences with luxurious
+            accommodations and world-class service.
+          </p>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {stats.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.15,
+              }}
+              whileHover={{
+                y: -10,
+                scale: 1.03,
+              }}
+              className="rounded-3xl bg-white p-10 text-center shadow-xl hover:shadow-2xl transition"
+            >
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-yellow-100 text-4xl text-yellow-600">
+                {item.icon}
               </div>
 
-              {/* Number */}
-              <h2 className="text-4xl md:text-5xl font-bold">{stat.number}</h2>
+              <h3 className="mt-8 text-5xl font-bold text-gray-900">
+                {item.number}
+              </h3>
 
-              {/* Title */}
-              <h3 className="text-xl font-semibold mt-2">{stat.title}</h3>
-
-              <p className="text-white/80 mt-2 text-sm">{stat.description}</p>
-            </div>
+              <p className="mt-3 text-gray-500">{item.title}</p>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Stats;
+}

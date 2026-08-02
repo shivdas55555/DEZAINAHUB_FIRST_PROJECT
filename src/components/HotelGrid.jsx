@@ -1,132 +1,91 @@
-import { FiHeart, FiMapPin, FiStar, FiArrowRight } from "react-icons/fi";
+import { motion } from "framer-motion";
+import { FaStar, FaHeart, FaMapMarkerAlt } from "react-icons/fa";
+import hotels from "../data/hotels";
 
-const hotels = [
-  {
-    id: 1,
-    name: "Grand Palace Hotel",
-    location: "Paris, France",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
-    price: 249,
-    rating: 4.9,
-  },
-  {
-    id: 2,
-    name: "Ocean Paradise",
-    location: "Maldives",
-    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
-    price: 329,
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    name: "Mountain Retreat",
-    location: "Swiss Alps",
-    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
-    price: 199,
-    rating: 4.7,
-  },
-  {
-    id: 4,
-    name: "Royal Stay",
-    location: "Dubai",
-    image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c",
-    price: 279,
-    rating: 4.9,
-  },
-  {
-    id: 5,
-    name: "Sunset Resort",
-    location: "Bali",
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
-    price: 189,
-    rating: 4.6,
-  },
-  {
-    id: 6,
-    name: "Skyline Suites",
-    location: "New York",
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-    price: 359,
-    rating: 5.0,
-  },
-];
-
-const HotelGrid = () => {
+export default function HotelGrid() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="bg-[#f8f6f2] py-28">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Heading */}
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <p className="text-indigo-600 font-semibold uppercase tracking-widest">
-              Featured Hotels
-            </p>
+        <div className="text-center mb-16">
+          <p className="uppercase tracking-[5px] text-yellow-600 font-semibold">
+            Featured Hotels
+          </p>
 
-            <h2 className="text-4xl md:text-5xl font-bold mt-2">
-              Discover Your Next Stay
-            </h2>
-          </div>
+          <h2 className="mt-4 text-5xl font-bold text-gray-900">
+            Luxury Stays
+          </h2>
 
-          <button className="hidden md:flex items-center gap-2 text-indigo-600 font-semibold hover:gap-3 transition-all">
-            View All
-            <FiArrowRight />
-          </button>
+          <p className="mt-5 text-gray-500 max-w-2xl mx-auto">
+            Hand-picked luxury resorts and premium hotels for unforgettable
+            experiences around the world.
+          </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {hotels.map((hotel) => (
-            <div
+        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
+          {hotels.map((hotel, index) => (
+            <motion.div
               key={hotel.id}
-              className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500"
+              initial={{ opacity: 0, y: 70 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                delay: index * 0.12,
+                duration: 0.7,
+              }}
+              whileHover={{ y: -10 }}
+              className="overflow-hidden rounded-[28px] bg-white shadow-xl"
             >
-              {/* Image */}
-              <div className="relative overflow-hidden h-72">
+              <div className="relative overflow-hidden">
                 <img
                   src={hotel.image}
                   alt={hotel.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  className="h-80 w-full object-cover transition duration-700 hover:scale-110"
                 />
 
-                <button className="absolute top-5 right-5 bg-white p-3 rounded-full shadow-lg hover:bg-red-500 hover:text-white transition">
-                  <FiHeart />
+                <button className="absolute right-5 top-5 h-11 w-11 rounded-full bg-white/90 backdrop-blur flex items-center justify-center">
+                  <FaHeart className="text-gray-700 hover:text-red-500 transition" />
                 </button>
 
-                <div className="absolute bottom-5 left-5 bg-white px-3 py-1 rounded-full flex items-center gap-1 font-semibold shadow">
-                  <FiStar className="text-yellow-500 fill-yellow-500" />
-                  {hotel.rating}
+                <div className="absolute left-5 top-5 rounded-full bg-yellow-600 px-4 py-2 text-sm text-white">
+                  Premium
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold">{hotel.name}</h3>
+              <div className="p-7">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-2xl font-semibold">{hotel.name}</h3>
 
-                <p className="flex items-center gap-2 text-gray-500 mt-2">
-                  <FiMapPin />
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    <FaStar />
+
+                    <span>{hotel.rating}</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex items-center gap-2 text-gray-500">
+                  <FaMapMarkerAlt />
+
                   {hotel.location}
-                </p>
+                </div>
 
-                <div className="flex justify-between items-center mt-6">
+                <div className="mt-7 flex justify-between items-center">
                   <div>
-                    <span className="text-3xl font-bold text-indigo-600">
+                    <span className="text-3xl font-bold text-yellow-600">
                       ${hotel.price}
                     </span>
 
-                    <span className="text-gray-500"> / night</span>
+                    <span className="text-gray-500">/ night</span>
                   </div>
 
-                  <button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl hover:scale-105 transition">
+                  <button className="rounded-full bg-black px-6 py-3 text-white transition hover:bg-yellow-600">
                     Book Now
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default HotelGrid;
+}
