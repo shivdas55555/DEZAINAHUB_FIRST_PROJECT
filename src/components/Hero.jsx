@@ -1,15 +1,20 @@
 import { motion } from "framer-motion";
 import hero from "../assets/hero.png";
+import heroVideo from "../assets/video/hero.mp4";
 
 export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image */}
-      <img
-        src={hero}
-        alt="Luxury Hotel"
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
         className="absolute inset-0 h-full w-full object-cover"
-      />
+      >
+        <source src={heroVideo} type="video/mp4" />
+      </video>
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/45" />
